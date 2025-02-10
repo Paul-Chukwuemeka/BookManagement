@@ -13,9 +13,9 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-// useEffect(()=>{
-//   localStorage.clear()
-// },[])
+useEffect(()=>{
+  localStorage.clear()
+},[])
 
   const handleLogIn = async (email, password) => {
     setError(false);

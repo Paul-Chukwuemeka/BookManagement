@@ -6,31 +6,42 @@ import Login from "./pages/login";
 import Signup from "./pages/signup";
 import AddBooks from "./pages/AddBooks";
 import AuthWrapper from "./Components/AuthWrapper";
+import LibraryProvider from "./contexts/libraryContext";
 import {
   BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
 
+
 function App() {
-
-
   return (
     <div className="h-screen">
       <Navbar />
-      <BrowserRouter>
-        <Routes>
-        <Route element={<AuthWrapper />}> 
-          <Route
-            path="/AddBooks"
-            element={<AddBooks />}
-          />
-          <Route path="/" element={<Home />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </BrowserRouter>
+      <LibraryProvider.Provider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<AuthWrapper />}>
+              <Route
+                path="/AddBooks"
+                element={<AddBooks />}
+              />
+              <Route
+                path="/"
+                element={<Home />}
+              />
+            </Route>
+            <Route
+              path="/login"
+              element={<Login />}
+            />
+            <Route
+              path="/signup"
+              element={<Signup />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </LibraryProvider.Provider>
     </div>
   );
 }

@@ -1,12 +1,10 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import ViewModal from "../Components/ViewModal";
-import { useNavigate,useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import DeleteModal from "../Components/DeleteModal";
 import EditModal from "../Components/EditModal";
-import {
-  FaDoorOpen,
-} from "react-icons/fa";
+import Loading from "../Components/loading";
 
 import {
   FaEye,
@@ -25,31 +23,15 @@ const Home = () => {
     useState(false);
   const [selectedBook, setSelectedBook] =
     useState({});
-
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const location = useLocation()
-  function checkAuth() {
-    const auth = JSON.parse(
-      localStorage.getItem("user")
-    );
-    if (!auth) {
-      navigate("/login");
-    } else {
-      navigate("/");
-    }
-  }
-  useEffect(() => {
-    checkAuth();
-  }, [location]);
 
   const user = JSON.parse(
     localStorage.getItem("user")
   );
 
   const token = user ? user.jwt : null;
-  console.log(token);
-
 
   useEffect(() => {
     if (!token) {
@@ -58,22 +40,30 @@ const Home = () => {
   }, [token]);
 
   useEffect(() => {
-    const fetchBooks = async () => {
-      const response = await axios.get(
-        "https://bookmanagement-3qi0.onrender.com/books",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      setBooks(response.data);
-    };
-    fetchBooks();
+    try {
+      setLoading(true)
+      const fetchBooks = async () => {
+        const response = await axios.get(
+          "https://bookmanagement-3qi0.onrender.com/books",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setBooks(response.data);
+        setLoading(false)
+      };
+      fetchBooks();
+    } catch (error) {
+      setLoading(false)
+      console.log(error);
+      if (error.status === 401) {
+        navigate("/login");
+      }
+    }
   }, [deleteModal, editModalState]);
 
-
- 
   const logOut = () => {
     localStorage.removeItem("user");
     navigate("/login");
@@ -98,29 +88,30 @@ const Home = () => {
           setEditModalState={setEditModalState}
         />
       )}
-      <div className="flex justify-between items-center">
+      {loading && <Loading />}
+
+      <div className="flex justify-between items-center relative">
         <button
-          className="p-2 border-2 w-fit  text-sky-500 border-sky-300  my-3"
+          className="p-2 border-2 w-fit  text-sky-500 border-sky-300 cursor-pointer my-3"
           onClick={() => navigate("./AddBooks")}
         >
           {" "}
           <FaPlus />
         </button>
         <span className="p-2  rounded-full flex gap-2 ">
-          <span className="flex items-center gap-2 rounded-lg text-white border-2 p-1 shadow-md bg-red-500"
-                        onClick={() => {
-                          logOut();
-                        }}
+          <span
+            className="flex items-center gap-2 rounded-lg text-white border-2 p-0.5  shadow-md bg-red-600 cursor-pointer"
+            onClick={() => {
+              logOut();
+            }}
           >
-            <p className="font-semibold text-lg">Log out</p>
-            <FaDoorOpen
-              className=" font-semibold text-2xl"
-              title="Log Out"
-            />
+            <p className="font-semibold text-lg">
+              Log out
+            </p>
           </span>
         </span>
       </div>
-      <table className="w-full table-auto border-collapse border-2 border-sky-500 ">
+      <table className="w-full table-auto border-collapse border-2 border-sky-500  ">
         <thead>
           <tr>
             <th>#</th>
@@ -142,23 +133,23 @@ const Home = () => {
                     book.publishDate
                   ).toLocaleDateString()}
                 </td>
-                <td className="flex justify-center items-center gap-2 border-none p-2">
+                <td className="flex justify-center  items-center gap-2 border-none p-2">
                   <FaEye
-                    className="text-green-500"
+                    className="text-green-500 cursor-pointer"
                     onClick={() => {
                       setModalState(true);
                       setSelectedBook(book);
                     }}
                   />
                   <FaPen
-                    className="text-yellow-500"
+                    className="text-yellow-500 cursor-pointer"
                     onClick={() => {
                       setEditModalState(true);
                       setSelectedBook(book);
                     }}
                   />
                   <FaTrashAlt
-                    className="text-red-500"
+                    className="text-red-500 cursor-pointer"
                     onClick={() => {
                       setDeleteModal(true);
                       setSelectedBook(book);
