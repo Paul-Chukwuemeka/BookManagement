@@ -1,8 +1,15 @@
 import axios from "axios";
-import { IoIosReturnLeft } from "react-icons/io";
+import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState,useEffect,useContext } from "react";
+import {LibraryContext} from "../contexts/libraryContext"
+import Loading from "../Components/loading";
+
+
+
+
 const AddBooks = () => {
+  const {loading,setLoading} = useContext(LibraryContext)
   const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
   const [date, setdate] = useState("");
@@ -23,6 +30,7 @@ const AddBooks = () => {
   }, [token]);
 
   const handleSubmit = async () => {
+    setLoading(true)
     axios
       .post("https://bookmanagement-3qi0.onrender.com/books/post", {
         title: title,
@@ -40,22 +48,26 @@ const AddBooks = () => {
     )
       .then(() => {
         console.log("Book Added");
+        setLoading(false)
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
+        setLoading(false)
       });
   };
 
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col justify-center items-center p-8">
+    <div className="flex flex-col justify-center items-center p-4">
       <button
-        className="self-start text-4xl bg-sky-500 text-white p-2 py-1  rounded-lg"
+        className="self-start text-2xl mb-10 bg-sky-500 text-white p-4 py-1  rounded-lg"
         onClick={() => navigate("/")}
       >
-        <IoIosReturnLeft />
+        <FaArrowLeft />
       </button>
+        {loading && <Loading />}
       <form
         onSubmit={(e) => {
           e.preventDefault();

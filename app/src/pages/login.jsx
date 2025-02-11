@@ -1,21 +1,28 @@
-import { useState,useEffect } from "react";
+import {
+  useState,
+  useEffect,
+  useContext,
+} from "react";
 import { useNavigate } from "react-router-dom";
-
+import { LibraryContext } from "../contexts/libraryContext";
 import axios from "axios";
+import Loading from "../Components/loading";
 
 const Login = () => {
+  const { loading, setLoading } = useContext(
+    LibraryContext
+  );
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] =
     useState("");
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
-useEffect(()=>{
-  localStorage.clear()
-},[])
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
 
   const handleLogIn = async (email, password) => {
     setError(false);
@@ -29,25 +36,30 @@ useEffect(()=>{
           password,
         }
       );
-      localStorage.setItem("user",JSON.stringify(response.data))
+      localStorage.setItem(
+        "user",
+        JSON.stringify(response.data)
+      );
       setLoading(false);
-      navigate('/')
+      navigate("/");
     } catch (error) {
       setError(true);
       if (error.response) {
         setErrorMessage(
           error.response.data.message
         );
+        setLoading(false);
       } else {
         setErrorMessage(
           "An unexpected error occurred."
         );
+        setLoading(false);
       }
     }
   };
   return (
     <div className="p-6">
-
+      {loading && <Loading />}
       <form
         className="shadow-[0px_-6px_37px_0px_rgba(0,_0,_0,_0.1)] w-[330px] mt-10 m-auto gap-5 p-4  flex flex-col justify-center rounded-xl items-center"
         onSubmit={async (e) => {
@@ -83,10 +95,13 @@ useEffect(()=>{
         <button className="bg-sky-500 p-2 py-1.5 rounded-lg w-6/12 text-white focus:outline-none hover:bg-sky-600">
           <span>Log in</span>
         </button>
-        <p onClick={() => navigate("/signup")} className="hover:text-sky-500 cursor-pointer">
-          Don&apos;t have an account ?</p>
+        <p
+          onClick={() => navigate("/signup")}
+          className="hover:text-sky-500 cursor-pointer"
+        >
+          Don&apos;t have an account ?
+        </p>
       </form>
-
     </div>
   );
 };

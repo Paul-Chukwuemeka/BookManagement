@@ -18,7 +18,7 @@ function App() {
   return (
     <div className="h-screen">
       <Navbar />
-      <LibraryProvider.Provider>
+      <LibraryProvider>
         <BrowserRouter>
           <Routes>
             <Route element={<AuthWrapper />}>
@@ -41,7 +41,7 @@ function App() {
             />
           </Routes>
         </BrowserRouter>
-      </LibraryProvider.Provider>
+      </LibraryProvider>
     </div>
   );
 }

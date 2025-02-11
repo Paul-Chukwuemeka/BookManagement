@@ -1,10 +1,17 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import {
+  useState,
+  useEffect,
+  useContext,
+} from "react";
 import ViewModal from "../Components/ViewModal";
 import { useNavigate } from "react-router-dom";
 import DeleteModal from "../Components/DeleteModal";
 import EditModal from "../Components/EditModal";
 import Loading from "../Components/loading";
+import { LibraryContext } from "../contexts/libraryContext";
+import { FaTableList } from "react-icons/fa6";
+import { PiSquaresFourFill } from "react-icons/pi";
 
 import {
   FaEye,
@@ -23,7 +30,9 @@ const Home = () => {
     useState(false);
   const [selectedBook, setSelectedBook] =
     useState({});
-  const [loading, setLoading] = useState(false);
+
+  const { loading, setLoading, setDisplay } =
+    useContext(LibraryContext);
 
   const navigate = useNavigate();
 
@@ -41,7 +50,7 @@ const Home = () => {
 
   useEffect(() => {
     try {
-      setLoading(true)
+      setLoading(true);
       const fetchBooks = async () => {
         const response = await axios.get(
           "https://bookmanagement-3qi0.onrender.com/books",
@@ -52,11 +61,11 @@ const Home = () => {
           }
         );
         setBooks(response.data);
-        setLoading(false)
+        setLoading(false);
       };
       fetchBooks();
     } catch (error) {
-      setLoading(false)
+      setLoading(false);
       console.log(error);
       if (error.status === 401) {
         navigate("/login");
@@ -69,7 +78,7 @@ const Home = () => {
     navigate("/login");
   };
   return (
-    <div className="p-5 min-h-[89.7vh] relative">
+    <div className="px-5 min-h-[89.7vh] relative">
       {modalState && (
         <ViewModal
           selectedBook={selectedBook}
@@ -111,6 +120,24 @@ const Home = () => {
           </span>
         </span>
       </div>
+      <span className="flex  gap-2 text-xl mb-2">
+        <button
+          className="p-1 hover:bg-sky-300 rounded-lg flex items-center justify-center gap-1"
+          onClick={() => {
+            setDisplay("list");
+          }}
+        >
+          <FaTableList /> List
+        </button>
+        <button
+          className="p-1 hover:bg-sky-300  rounded-lg flex items-center justify-center gap-1"
+          onClick={() => {
+            setDisplay("table");
+          }}
+        >
+          <PiSquaresFourFill /> Table
+        </button>
+      </span>
       <table className="w-full table-auto border-collapse border-2 border-sky-500  ">
         <thead>
           <tr>
@@ -133,7 +160,7 @@ const Home = () => {
                     book.publishDate
                   ).toLocaleDateString()}
                 </td>
-                <td className="flex justify-center  items-center gap-2 border-none p-2">
+                <td className="flex justify-center  items-center gap-2  border-0 border-b-2  text-lg py-2">
                   <FaEye
                     className="text-green-500 cursor-pointer"
                     onClick={() => {
