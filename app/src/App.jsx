@@ -1,6 +1,5 @@
 // import { useState } from 'react'
 import "./App.css";
-import Navbar from "./Components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/login";
 import Signup from "./pages/signup";
@@ -17,7 +16,6 @@ import {
 function App() {
   return (
     <div className="h-screen">
-      <Navbar />
       <LibraryProvider>
         <BrowserRouter>
           <Routes>

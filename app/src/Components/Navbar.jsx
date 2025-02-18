@@ -1,10 +1,12 @@
-import { FaWorm } from "react-icons/fa6";
+import PropTypes from "prop-types";
 
-const Navbar = () => {
+
+
+const Navbar = ({className}) => {
   return (
-    <div className="p-4 relative z-10">
-      <h1 className="text-2xl flex items-center font-bold gap-2 text-sky-600">
-        <FaWorm />
+    <div className={`p-4 relative z-10 ${className} `}>
+      <h1 className=" flex items-center font-bold gap-2 text-sky-600">
+        <img src="/lightlogo.png"/>
         <span>
           Book
           <span className="text-red-500">
@@ -15,5 +17,10 @@ const Navbar = () => {
     </div>
   );
 };
+
+Navbar.propTypes = {
+  className: PropTypes.string,
+};
+
 
 export default Navbar;

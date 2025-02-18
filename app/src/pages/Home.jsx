@@ -12,11 +12,10 @@ import Loading from "../Components/loading";
 import { LibraryContext } from "../contexts/libraryContext";
 import { FaTableList } from "react-icons/fa6";
 import { PiSquaresFourFill } from "react-icons/pi";
+import Table from "../Components/Table";
+import Card from "../Components/Card";
 
 import {
-  FaEye,
-  FaPen,
-  FaTrashAlt,
   FaPlus,
 } from "react-icons/fa";
 
@@ -31,7 +30,7 @@ const Home = () => {
   const [selectedBook, setSelectedBook] =
     useState({});
 
-  const { loading, setLoading, setDisplay } =
+  const { loading, setLoading, setDisplay ,display } =
     useContext(LibraryContext);
 
   const navigate = useNavigate();
@@ -43,15 +42,9 @@ const Home = () => {
   const token = user ? user.jwt : null;
 
   useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }
-  }, [token]);
-
-  useEffect(() => {
-    try {
-      setLoading(true);
-      const fetchBooks = async () => {
+    const fetchBooks = async () => {
+      try {
+        setLoading(true);
         const response = await axios.get(
           "https://bookmanagement-3qi0.onrender.com/books",
           {
@@ -62,17 +55,21 @@ const Home = () => {
         );
         setBooks(response.data);
         setLoading(false);
-      };
-      fetchBooks();
-    } catch (error) {
-      setLoading(false);
-      console.log(error);
-      if (error.status === 401) {
-        navigate("/login");
+      } catch (error) {
+        setLoading(false);
+        if (error.response?.status === 401) {
+          navigate("/login");
+        }
+        else{
+          console.log(error);
+        }
       }
-    }
-  }, [deleteModal, editModalState]);
+    };
 
+    fetchBooks();
+  }, [token,deleteModal,editModalState]);
+
+  
   const logOut = () => {
     localStorage.removeItem("user");
     navigate("/login");
@@ -122,7 +119,7 @@ const Home = () => {
       </div>
       <span className="flex  gap-2 text-xl mb-2">
         <button
-          className="p-1 hover:bg-sky-300 rounded-lg flex items-center justify-center gap-1"
+          className="p-1 text-black hover:bg-sky-300 hover:text-white focus:outline-none rounded-lg flex items-center justify-center gap-1"
           onClick={() => {
             setDisplay("list");
           }}
@@ -130,7 +127,7 @@ const Home = () => {
           <FaTableList /> List
         </button>
         <button
-          className="p-1 hover:bg-sky-300  rounded-lg flex items-center justify-center gap-1"
+          className="p-1 text-black hover:bg-sky-300 hover:text-white focus:outline-none rounded-lg flex items-center justify-center gap-1"
           onClick={() => {
             setDisplay("table");
           }}
@@ -138,56 +135,11 @@ const Home = () => {
           <PiSquaresFourFill /> Table
         </button>
       </span>
-      <table className="w-full table-auto border-collapse border-2 border-sky-500  ">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Publish Date</th>
-            <th>Menu</th>
-          </tr>
-        </thead>
-        <tbody>
-          {books.map((book, index) => {
-            return (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>{book.title}</td>
-                <td>{book.author}</td>
-                <td>
-                  {new Date(
-                    book.publishDate
-                  ).toLocaleDateString()}
-                </td>
-                <td className="flex justify-center  items-center gap-2  border-0 border-b-2  text-lg py-2">
-                  <FaEye
-                    className="text-green-500 cursor-pointer"
-                    onClick={() => {
-                      setModalState(true);
-                      setSelectedBook(book);
-                    }}
-                  />
-                  <FaPen
-                    className="text-yellow-500 cursor-pointer"
-                    onClick={() => {
-                      setEditModalState(true);
-                      setSelectedBook(book);
-                    }}
-                  />
-                  <FaTrashAlt
-                    className="text-red-500 cursor-pointer"
-                    onClick={() => {
-                      setDeleteModal(true);
-                      setSelectedBook(book);
-                    }}
-                  />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      {display === "table" ? (
+        <Table books={books} selectedBook={selectedBook} setSelectedBook={setSelectedBook} setModalState={setModalState} setDeleteModal={setDeleteModal} setEditModalState={setEditModalState}/>
+      ) : (
+        <Card />
+      )}
     </div>
   );
 };

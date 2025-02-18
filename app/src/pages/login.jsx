@@ -58,50 +58,87 @@ const Login = () => {
     }
   };
   return (
-    <div className="p-6">
-      {loading && <Loading />}
-      <form
-        className="shadow-[0px_-6px_37px_0px_rgba(0,_0,_0,_0.1)] w-[330px] mt-10 m-auto gap-5 p-4  flex flex-col justify-center rounded-xl items-center"
-        onSubmit={async (e) => {
-          e.preventDefault();
-          await handleLogIn(email, password);
-        }}
-      >
-        <h1 className="text-2xl font-bold">
-          Log In
-        </h1>
-
-        <input
-          type="text"
-          className="p-3 w-full border-2 rounded-lg"
-          placeholder="Email"
-          onInput={(e) =>
-            setEmail(e.target.value)
-          }
-        />
-        <input
-          type="password"
-          className="p-3 w-full border-2 rounded-lg"
-          placeholder="Password"
-          onInput={(e) =>
-            setPassword(e.target.value)
-          }
-        />
-        {error && (
-          <p className="text-red-500">
-            {errorMessage}
+    <div className="grid grid-cols-2 gap-0 h-screen ">
+      <div className="flex flex-col justify-between items-center px-32 p-24 gap-4">
+        {loading && <Loading />}
+        <div className="flex flex-col justify-between h-2/5 items-center gap-1 ">
+          <img
+            src="/lightlogo.png"
+            alt="Logo"
+            className="w-20"
+          />
+          <h2 className="text-5xl  gap-1 flex items-center font-bold">
+            Welcome Back!!
+          </h2>
+          <p className="text-lg">
+            Please enter your credentials to login
           </p>
-        )}
-        <button className="bg-sky-500 p-2 py-1.5 rounded-lg w-6/12 text-white focus:outline-none hover:bg-sky-600">
-          <span>Log in</span>
-        </button>
-        <p
-          onClick={() => navigate("/signup")}
-          className="hover:text-sky-500 cursor-pointer"
+        </div>
+        <form
+          onSubmit={async (e) => {
+            e.preventDefault();
+            await handleLogIn(email, password);
+          }}
+          className="flex w-full flex-col gap-4 justify-center items-center"
         >
-          Don&apos;t have an account ?
-        </p>
-      </form>
+          <input
+            type="text"
+            className="p-4 w-full border border-black rounded-2xl"
+            placeholder="Email"
+            onInput={(e) =>
+              setEmail(e.target.value)
+            }
+          />
+          <input
+            type="password"
+            className="p-4 w-full border border-black rounded-2xl"
+            placeholder="Password"
+            onInput={(e) =>
+              setPassword(e.target.value)
+            }
+          />
+          <p className="self-start font-semibold">
+            Forgot Password?
+          </p>
+          {error && (
+            <p className="text-red-500">
+              {errorMessage}
+            </p>
+          )}
+          <button className="bg-black p-3 duration-700 rounded-2xl text-xl font-bold w-full text-white focus:outline-none hover:bg-white hover:text-black hover:border hover:border-black">
+            <span>Log in</span>
+          </button>
+        </form>
+      </div>
+      <div className="bg-black text-sky-500 rounded-[30px_0_0_30px] h-screen text-5xl flex flex-col justify-between gap-2 items-center p-24">
+        <div className="flex flex-col items-center gap-1">
+          <img
+            src="/darkLogo.png"
+            alt="Logo"
+            className="w-20"
+          />
+          <p>
+            Book
+            <span className="text-red-500">
+              Worm
+            </span>
+          </p>
+          <p className="text-2xl text-white">
+            Library
+          </p>
+        </div>
+        <div className="flex flex-col items-center gap-4">
+          <p className="text-white text-xl">
+            New to our platform? sign up now.
+          </p>
+          <button
+            onClick={() => navigate("/signup")}
+            className="text-white text-xl border px-16 py-3 rounded-2xl"
+          >
+            Sign Up
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

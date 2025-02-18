@@ -1,7 +1,7 @@
 import axios from "axios";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useState,useEffect,useContext } from "react";
+import { useState,useContext } from "react";
 import {LibraryContext} from "../contexts/libraryContext"
 import Loading from "../Components/loading";
 
@@ -22,12 +22,6 @@ const AddBooks = () => {
   );
   const token = user ? user.jwt : null;
 
-
-  useEffect(() => {
-    if (!token) {
-      navigate("/login");
-    }
-  }, [token]);
 
   const handleSubmit = async () => {
     setLoading(true)
@@ -61,13 +55,13 @@ const AddBooks = () => {
 
   return (
     <div className="flex flex-col justify-center items-center p-4">
+      {loading && <Loading />}
       <button
         className="self-start text-2xl mb-10 bg-sky-500 text-white p-4 py-1  rounded-lg"
         onClick={() => navigate("/")}
       >
         <FaArrowLeft />
       </button>
-        {loading && <Loading />}
       <form
         onSubmit={(e) => {
           e.preventDefault();
