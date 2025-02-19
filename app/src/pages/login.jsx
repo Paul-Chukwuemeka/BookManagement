@@ -57,6 +57,7 @@ const Login = () => {
       }
     }
   };
+  const transition = "hover:bg-white duration-700  hover:text-black hover:border hover:border-black"
   return (
     <div className="grid grid-cols-2 gap-0 h-screen ">
       <div className="flex flex-col justify-between items-center px-32 p-24 gap-4">
@@ -83,6 +84,7 @@ const Login = () => {
         >
           <input
             type="text"
+            required
             className="p-4 w-full border border-black rounded-2xl"
             placeholder="Email"
             onInput={(e) =>
@@ -91,6 +93,7 @@ const Login = () => {
           />
           <input
             type="password"
+            required
             className="p-4 w-full border border-black rounded-2xl"
             placeholder="Password"
             onInput={(e) =>
@@ -105,35 +108,35 @@ const Login = () => {
               {errorMessage}
             </p>
           )}
-          <button className="bg-black p-3 duration-700 rounded-2xl text-xl font-bold w-full text-white focus:outline-none hover:bg-white hover:text-black hover:border hover:border-black">
+          <button className={`bg-black p-3 rounded-2xl text-xl font-bold w-full text-white focus:outline-none ${transition}`}>
             <span>Log in</span>
           </button>
         </form>
       </div>
-      <div className="bg-black text-sky-500 rounded-[30px_0_0_30px] h-screen text-5xl flex flex-col justify-between gap-2 items-center p-24">
-        <div className="flex flex-col items-center gap-1">
+      <div className="bg-black text-sky-500 rounded-[30px_0_0_30px] h-screen  flex flex-col justify-between gap-4 items-center p-24">
+        <div className="flex flex-col items-center gap-4">
           <img
             src="/darkLogo.png"
             alt="Logo"
-            className="w-20"
+            className="w-24"
           />
-          <p>
+          <p className="text-6xl font-semibold">
             Book
             <span className="text-red-500">
               Worm
             </span>
           </p>
-          <p className="text-2xl text-white">
+          <p className="text-3xl text-white">
             Library
           </p>
         </div>
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-6">
           <p className="text-white text-xl">
             New to our platform? sign up now.
           </p>
           <button
             onClick={() => navigate("/signup")}
-            className="text-white text-xl border px-16 py-3 rounded-2xl"
+            className={`text-white text-xl border px-16 py-3 rounded-2xl ${transition}`}
           >
             Sign Up
           </button>
