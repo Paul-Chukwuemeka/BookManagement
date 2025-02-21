@@ -68,7 +68,7 @@ const Login = () => {
             alt="Logo"
             className="w-20"
           />
-          <h2 className="text-5xl  gap-1 flex items-center font-bold">
+          <h2 className="text-4xl  gap-1 flex items-center font-bold">
             Welcome Back!!
           </h2>
           <p className="text-lg">
@@ -121,10 +121,7 @@ const Login = () => {
             className="w-24"
           />
           <p className="text-6xl font-semibold">
-            Book
-            <span className="text-red-500">
-              Worm
-            </span>
+            BookWorm
           </p>
           <p className="text-3xl text-white">
             Library

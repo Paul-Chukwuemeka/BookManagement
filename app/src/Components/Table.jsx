@@ -3,13 +3,21 @@ import {
   FaPen,
   FaTrashAlt,
 } from "react-icons/fa";
+import { LibraryContext } from "../contexts/libraryContext";
+import { useContext } from "react";
+import Loading from "./Loading";
 
 
 import PropTypes from 'prop-types';
 
 const Table = ({ books, setSelectedBook, setModalState, setDeleteModal, setEditModalState }) => {
+
+    const { loading } = useContext(
+      LibraryContext
+    );
   return (
     <table className="w-full table-auto border-collapse border-2 border-sky-500  ">
+      {loading && <Loading />}
     <thead>
       <tr>
         <th>#</th>

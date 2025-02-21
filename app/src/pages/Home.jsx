@@ -8,16 +8,9 @@ import ViewModal from "../Components/ViewModal";
 import { useNavigate } from "react-router-dom";
 import DeleteModal from "../Components/DeleteModal";
 import EditModal from "../Components/EditModal";
-import Loading from "../Components/loading";
 import { LibraryContext } from "../contexts/libraryContext";
-import { FaTableList } from "react-icons/fa6";
-import { PiSquaresFourFill } from "react-icons/pi";
-import Table from "../Components/Table";
-import Card from "../Components/Card";
-
-import {
-  FaPlus,
-} from "react-icons/fa";
+import SideBar from "../Components/sideBar";
+import Main from "../Components/Main";
 
 const Home = () => {
   const [books, setBooks] = useState([]);
@@ -27,11 +20,10 @@ const Home = () => {
     useState(false);
   const [editModalState, setEditModalState] =
     useState(false);
-  const [selectedBook, setSelectedBook] =
-    useState({});
 
-  const { loading, setLoading, setDisplay ,display } =
-    useContext(LibraryContext);
+  const { setLoading, selectedBook } = useContext(
+    LibraryContext
+  );
 
   const navigate = useNavigate();
 
@@ -59,23 +51,18 @@ const Home = () => {
         setLoading(false);
         if (error.response?.status === 401) {
           navigate("/login");
-        }
-        else{
+        } else {
           console.log(error);
         }
       }
     };
 
     fetchBooks();
-  }, [token,deleteModal,editModalState]);
+  }, [token, deleteModal, editModalState]);
 
-  
-  const logOut = () => {
-    localStorage.removeItem("user");
-    navigate("/login");
-  };
+
   return (
-    <div className="px-5 min-h-[89.7vh] relative">
+    <div className="min-h-screen relative grid-cols-[160px_1fr] grid">
       {modalState && (
         <ViewModal
           selectedBook={selectedBook}
@@ -94,52 +81,9 @@ const Home = () => {
           setEditModalState={setEditModalState}
         />
       )}
-      {loading && <Loading />}
-
-      <div className="flex justify-between items-center relative">
-        <button
-          className="p-2 border-2 w-fit  text-sky-500 border-sky-300 cursor-pointer my-3"
-          onClick={() => navigate("./AddBooks")}
-        >
-          {" "}
-          <FaPlus />
-        </button>
-        <span className="p-2  rounded-full flex gap-2 ">
-          <span
-            className="flex items-center gap-2 rounded-lg text-white border-2 p-0.5  shadow-md bg-red-600 cursor-pointer"
-            onClick={() => {
-              logOut();
-            }}
-          >
-            <p className="font-semibold text-lg">
-              Log out
-            </p>
-          </span>
-        </span>
-      </div>
-      <span className="flex  gap-2 text-xl mb-2">
-        <button
-          className="p-1 text-black hover:bg-sky-300 hover:text-white focus:outline-none rounded-lg flex items-center justify-center gap-1"
-          onClick={() => {
-            setDisplay("list");
-          }}
-        >
-          <FaTableList /> List
-        </button>
-        <button
-          className="p-1 text-black hover:bg-sky-300 hover:text-white focus:outline-none rounded-lg flex items-center justify-center gap-1"
-          onClick={() => {
-            setDisplay("table");
-          }}
-        >
-          <PiSquaresFourFill /> Table
-        </button>
-      </span>
-      {display === "table" ? (
-        <Table books={books} selectedBook={selectedBook} setSelectedBook={setSelectedBook} setModalState={setModalState} setDeleteModal={setDeleteModal} setEditModalState={setEditModalState}/>
-      ) : (
-        <Card />
-      )}
+      <SideBar/>
+      <Main books={books}/>
+     
     </div>
   );
 };

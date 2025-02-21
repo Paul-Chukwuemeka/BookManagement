@@ -1,11 +1,12 @@
 import PropTypes from "prop-types";
-import { createContext, useState } from "react";
+import {  useState } from "react";
+import { LibraryContext } from "./contextFile";
 
-export const LibraryContext = createContext({});
 
 const LibraryProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [display, setDisplay] = useState("table");
+  const [selectedBook, setSelectedBook] = useState({});
   return (
     <LibraryContext.Provider
       value={{
@@ -13,6 +14,8 @@ const LibraryProvider = ({ children }) => {
         setLoading,
         display,
         setDisplay,
+        selectedBook,
+        setSelectedBook,
       }}
     >
       {children}

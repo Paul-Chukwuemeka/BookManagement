@@ -49,7 +49,7 @@ const Signup = () => {
 
   return (
     <div className="grid grid-cols-2">
-      <div className="bg-black text-sky-500 rounded-[0px_30px_30px_0px] h-screen text-5xl flex flex-col justify-between gap-2 items-center p-24  ">
+      <div className="bg-black text-white rounded-[0px_30px_30px_0px] h-screen text-5xl flex flex-col justify-between gap-2 items-center p-24  ">
         <div className="flex flex-col items-center gap-1">
           <img
             src="/darkLogo.png"
@@ -57,10 +57,8 @@ const Signup = () => {
             className="w-24"
           />
           <p>
-            Book
-            <span className="text-red-500 text-6xl">
-              Worm
-            </span>
+            BookWorm
+
           </p>
           <p className="text-3xl text-white">
             Library
@@ -78,17 +76,17 @@ const Signup = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-col justify-between items-center px-32 p-20 gap-4">
-        <div className="flex flex-col justify-between h-2/5 items-center gap-1 ">
+      <div className="flex flex-col justify-center items-center px-32 p-16 gap-4 ">
+        <div className="flex flex-col justify-start gap-2 items-center ">
           <img
             src="/lightlogo.png"
             alt="Logo"
-            className="w-20"
+            className="w-18"
           />
-          <h2 className="text-5xl  gap-1 flex items-center font-bold">
+          <h2 className="text-4xl flex items-center font-bold">
             Sign In
           </h2>
-          <p className="text-lg">
+          <p className="">
             Please provide your information to sign up
           </p>
         </div>
@@ -121,7 +119,7 @@ const Signup = () => {
             placeholder="Email"
             required
             onInput={(e) =>
-              setEmail(e.target.value)
+              setEmail(e.target.value.toLowercase())
             }
           />
           <input
