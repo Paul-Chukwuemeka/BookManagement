@@ -3,9 +3,9 @@ import {
   FaPen,
   FaTrashAlt,
 } from "react-icons/fa";
-import { LibraryContext } from "../contexts/libraryContext";
+import { LibraryContext } from "../contexts/contextFile";
 import { useContext } from "react";
-import Loading from "./Loading";
+import Loading from "./loading";
 
 
 import PropTypes from 'prop-types';

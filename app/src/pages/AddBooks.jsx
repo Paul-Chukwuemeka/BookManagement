@@ -1,15 +1,14 @@
 import axios from "axios";
 import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import { useState,useContext } from "react";
-import {LibraryContext} from "../contexts/libraryContext"
+import { useState, useContext } from "react";
+import { LibraryContext } from "../contexts/contextFile";
 import Loading from "../Components/loading";
 
-
-
-
 const AddBooks = () => {
-  const {loading,setLoading} = useContext(LibraryContext)
+  const { loading, setLoading } = useContext(
+    LibraryContext
+  );
   const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
   const [date, setdate] = useState("");
@@ -22,32 +21,33 @@ const AddBooks = () => {
   );
   const token = user ? user.jwt : null;
 
-
   const handleSubmit = async () => {
-    setLoading(true)
+    setLoading(true);
     axios
-      .post("https://bookmanagement-3qi0.onrender.com/books/post", {
-        title: title,
-        author: author,
-        publishDate: date,
-        description: description,
-        coverImage: link,
-      },
-      
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      .post(
+        "https://bookmanagement-3qi0.onrender.com/books/post",
+        {
+          title: title,
+          author: author,
+          publishDate: date,
+          description: description,
+          coverImage: link,
         },
-      }
-    )
+
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
       .then(() => {
         console.log("Book Added");
-        setLoading(false)
+        setLoading(false);
         navigate("/");
       })
       .catch((err) => {
         console.log(err);
-        setLoading(false)
+        setLoading(false);
       });
   };
 

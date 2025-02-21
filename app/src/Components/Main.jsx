@@ -1,6 +1,8 @@
 import Header from "./header";
+import Table from "./Table";
 import { FaPlusCircle, FaSearch } from "react-icons/fa";
-const Main = () => {
+import PropTypes from 'prop-types';
+const Main = ({books}) => {
   return (
     <div className="relative bg-[#c7c7c770]">
       <Header />
@@ -23,8 +25,13 @@ const Main = () => {
           </span>
         </span>
       </div>
+      <Table books={books}/>
     </div>
   );
 };
+Main.propTypes = {
+  books: PropTypes.array.isRequired,
+};
 
 export default Main;
+
