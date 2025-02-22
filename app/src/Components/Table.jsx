@@ -7,70 +7,73 @@ import { LibraryContext } from "../contexts/contextFile";
 import { useContext } from "react";
 import Loading from "./loading";
 
+import PropTypes from "prop-types";
 
-import PropTypes from 'prop-types';
+const Table = ({
+  books,
 
-const Table = ({ books, setSelectedBook, setModalState, setDeleteModal, setEditModalState }) => {
-
-    const { loading } = useContext(
-      LibraryContext
-    );
+}) => {
+  const { loading,setSelectedBook,setViewModal,setDeleteModal,setEditModal } = useContext(LibraryContext);
   return (
-   <div className="bg-white shadow-md rounded-lg p-2 ">
-     <table className="w-full  ">
-      {loading && <Loading />}
-    <thead>
-      <tr className=" border-b border-black">
-        <th>#</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Publish Date</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      {books.map((book, index) => {
-        return (
-          <tr key={index} className="text-center">
-            <td>{index + 1}</td>
-            <td>{book.title}</td>
-            <td>{book.author}</td>
-            <td>
-              {new Date(
-                book.publishDate
-              ).toLocaleDateString()}
-            </td>
-            <td className="flex justify-center  items-center gap-2 ">
-              <FaEye
-                className="text-green-500 cursor-pointer"
-                onClick={() => {
-                  setModalState(true);
-                  setSelectedBook(book);
-                }}
-              />
-              <FaPen
-                className="text-yellow-500 cursor-pointer"
-                onClick={() => {
-                  setEditModalState(true);
-                  setSelectedBook(book);
-                }}
-              />
-              <FaTrashAlt
-                className="text-red-500 cursor-pointer"
-                onClick={() => {
-                  setDeleteModal(true);
-                  setSelectedBook(book);
-                }}
-              />
-            </td>
+    <div className="bg-white shadow-md rounded-lg p-2 ">
+      <table className="w-full  ">
+        {loading && <Loading />}
+        <thead>
+          <tr className=" border-b border-black">
+            <th>#</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Publish Date</th>
+            <th>Action</th>
           </tr>
-        );
-      })}
-    </tbody>
-  </table>
-   </div>
-  )}
-  
+        </thead>
+        <tbody>
+          {books.map((book, index) => {
+            return (
+              <tr
+                key={index}
+                className="text-center"
+              >
+                <td>{index + 1}</td>
+                <td>{book.title}</td>
+                <td>{book.author}</td>
+                <td>
+                  {new Date(
+                    book.publishDate
+                  ).toLocaleDateString()}
+                </td>
+                <td className="flex justify-center  items-center gap-2 ">
+                  <FaEye
+                    className="text-green-500 cursor-pointer"
+                    onClick={() => {
+                      setViewModal(true);
+                      setSelectedBook(book);
+                    }}
+                  />
+                  <FaPen
+                    className="text-yellow-500 cursor-pointer"
+                    onClick={() => {
+                      setEditModal(true);
+                      setSelectedBook(book);
+                    }}
+                  />
+                  <FaTrashAlt
+                    className="text-red-500 cursor-pointer"
+                    onClick={() => {
+                      setDeleteModal(true);
+                      setSelectedBook(book);
+                    }}
+                  />
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
 Table.propTypes = {
   books: PropTypes.arrayOf(
     PropTypes.shape({
@@ -79,11 +82,6 @@ Table.propTypes = {
       publishDate: PropTypes.string.isRequired,
     })
   ).isRequired,
-  setSelectedBook: PropTypes.func.isRequired,
-  setModalState: PropTypes.func.isRequired,
-  setDeleteModal: PropTypes.func.isRequired,
-  setEditModalState: PropTypes.func.isRequired,
 };
 
-
-export default Table
+export default Table;

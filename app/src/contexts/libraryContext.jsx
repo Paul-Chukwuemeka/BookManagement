@@ -7,6 +7,9 @@ const LibraryProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
   const [display, setDisplay] = useState("table");
   const [selectedBook, setSelectedBook] = useState({});
+  const [veiwModal,setViewModal] = useState(false);
+  const [editModal,setEditModal] = useState(false);
+  const [deleteModal,setDeleteModal] = useState(false);
   return (
     <LibraryContext.Provider
       value={{
@@ -16,6 +19,13 @@ const LibraryProvider = ({ children }) => {
         setDisplay,
         selectedBook,
         setSelectedBook,
+        veiwModal,
+        setViewModal,
+        editModal,
+        setEditModal,
+        deleteModal,
+        setDeleteModal,
+        
       }}
     >
       {children}
