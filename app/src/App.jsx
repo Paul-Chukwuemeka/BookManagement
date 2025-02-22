@@ -21,10 +21,6 @@ function App() {
           <Routes>
             <Route element={<AuthWrapper />}>
               <Route
-                path="/AddBooks"
-                element={<AddBooks />}
-              />
-              <Route
                 path="/"
                 element={<Home />}
               />

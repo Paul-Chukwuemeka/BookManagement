@@ -1,5 +1,4 @@
 import axios from "axios";
-import { FaArrowLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { LibraryContext } from "../contexts/contextFile";
@@ -52,16 +51,13 @@ const AddBooks = () => {
   };
 
   const navigate = useNavigate();
+  const transition = "hover:bg-white duration-700  hover:text-black hover:border hover:border-black"
+
 
   return (
-    <div className="flex flex-col justify-center items-center p-4">
+    <div className="flex flex-col justify-center items-center p-4 absolute duration-700 top-0 right-0 left-0 bottom-0">
       {loading && <Loading />}
-      <button
-        className="self-start text-2xl mb-10 bg-sky-500 text-white p-4 py-1  rounded-lg"
-        onClick={() => navigate("/")}
-      >
-        <FaArrowLeft />
-      </button>
+
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -111,7 +107,10 @@ const AddBooks = () => {
             setDescription(e.target.value)
           }
         ></textarea>
-        <button>Save</button>
+        <span className="flex gap-2 justify-center">
+          <button className={`p-2 w-36 rounded-lg border border-black ${transition} bg-black text-white`}>Cancel</button>
+          <button className={`p-2 w-36 rounded-lg  border border-black ${transition}  hover:bg-black hover:text-white`}>Save</button>
+        </span>
       </form>
     </div>
   );

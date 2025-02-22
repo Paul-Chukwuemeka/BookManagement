@@ -4,9 +4,9 @@ import { FaPlusCircle, FaSearch } from "react-icons/fa";
 import PropTypes from 'prop-types';
 const Main = ({books}) => {
   return (
-    <div className="relative bg-[#c7c7c770]">
+    <div className="relative bg-[#c7c7c770] p-4">
       <Header />
-      <div className="flex justify-between p-4">
+      <div className="flex justify-between p-4 mt-10 items-center">
         <h1 className="text-xl font-bold">Book Management</h1>
         <span className="flex gap-2">
           <button className="flex items-center justify-center p-2 rounded-md gap-2 bg-black text-gray-200">

@@ -16,21 +16,22 @@ const Table = ({ books, setSelectedBook, setModalState, setDeleteModal, setEditM
       LibraryContext
     );
   return (
-    <table className="w-full table-auto border-collapse border-2 border-sky-500  ">
+   <div className="bg-white shadow-md rounded-lg p-2 ">
+     <table className="w-full  ">
       {loading && <Loading />}
     <thead>
-      <tr>
+      <tr className=" border-b border-black">
         <th>#</th>
         <th>Title</th>
         <th>Author</th>
         <th>Publish Date</th>
-        <th>Menu</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       {books.map((book, index) => {
         return (
-          <tr key={index}>
+          <tr key={index} className="text-center">
             <td>{index + 1}</td>
             <td>{book.title}</td>
             <td>{book.author}</td>
@@ -39,7 +40,7 @@ const Table = ({ books, setSelectedBook, setModalState, setDeleteModal, setEditM
                 book.publishDate
               ).toLocaleDateString()}
             </td>
-            <td className="flex justify-center  items-center gap-2  border-0 border-b-2  text-lg py-2">
+            <td className="flex justify-center  items-center gap-2 ">
               <FaEye
                 className="text-green-500 cursor-pointer"
                 onClick={() => {
@@ -67,6 +68,7 @@ const Table = ({ books, setSelectedBook, setModalState, setDeleteModal, setEditM
       })}
     </tbody>
   </table>
+   </div>
   )}
   
 Table.propTypes = {
