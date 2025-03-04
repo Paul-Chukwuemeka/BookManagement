@@ -49,7 +49,7 @@ const Signup = () => {
 
   return (
     <div className="grid grid-cols-2">
-      <div className="bg-black text-white rounded-[0px_30px_30px_0px] h-screen text-5xl flex flex-col justify-between gap-2 items-center p-24  ">
+      <div className="bg-black text-white rounded-[0px_30px_30px_0px] h-screen text-5xl flex flex-col justify-around gap-2 items-center p-24  ">
         <div className="flex flex-col items-center gap-1">
           <img
             src="/darkLogo.png"
@@ -76,17 +76,17 @@ const Signup = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-col justify-center items-center px-32 p-16 gap-4 ">
-        <div className="flex flex-col justify-start gap-2 items-center ">
+      <div className="flex flex-col justify-around items-center px-32 p-16 gap-6 ">
+        <div className="flex flex-col justify-center h-2/5 items-center gap-6 ">
           <img
             src="/lightlogo.png"
             alt="Logo"
-            className="w-18"
+            className="w-28"
           />
-          <h2 className="text-4xl flex items-center font-bold">
+          <h2 className="text-4xl  gap-1 flex items-center font-bold">
             Sign In
           </h2>
-          <p className="">
+          <p className="text-lg">
             Please provide your information to sign up
           </p>
         </div>
@@ -99,14 +99,12 @@ const Signup = () => {
               password
             );
           }}
-          className="flex w-full flex-col gap-4 justify-center items-center"
+          className="flex w-full py-5 max-w-[450px] flex-col gap-4 justify-center items-center"
         >
-          <h1 className="text-2xl font-bold">
-            Create an account
-          </h1>
+
           <input
             type="text"
-            className="p-4 w-full border border-black rounded-2xl"
+            className="p-4 py-5 w-full border border-black rounded-2xl"
             placeholder="User name"
             required
             onInput={(e) =>
@@ -115,7 +113,7 @@ const Signup = () => {
           />
           <input
             type="text"
-            className="p-4 w-full border border-black rounded-2xl"
+            className="p-4 py-5 w-full border border-black rounded-2xl"
             placeholder="Email"
             required
             onInput={(e) =>
@@ -124,7 +122,7 @@ const Signup = () => {
           />
           <input
             type="password"
-            className="p-4 w-full border border-black rounded-2xl"
+            className="p-4 py-5 w-full border border-black rounded-2xl"
             placeholder="Password"
             required
             onInput={(e) =>
@@ -137,7 +135,7 @@ const Signup = () => {
             </p>
           )}
           <button
-            className={`bg-black p-3 rounded-2xl text-xl font-bold w-full text-white focus:outline-none ${transition}`}
+            className={`bg-black p-3 rounded-2xl text-xl py-4  font-bold w-4/5 text-white focus:outline-none ${transition}`}
           >
             <span>Sign Up</span>
           </button>
