@@ -22,6 +22,7 @@ const Login = () => {
 
   useEffect(() => {
     localStorage.clear();
+    setLoading(false)
   }, []);
 
   const handleLogIn = async (email, password) => {
@@ -60,13 +61,13 @@ const Login = () => {
   const transition = "hover:bg-white duration-700  hover:text-black hover:border hover:border-black"
   return (
     <div className="grid grid-cols-2 gap-0 h-screen ">
-      <div className="flex flex-col justify-between items-center px-32 p-24 gap-4">
+      <div className="flex flex-col justify-around items-center px-32 p-24 gap-4">
         {loading && <Loading />}
-        <div className="flex flex-col justify-between h-2/5 items-center gap-1 ">
+        <div className="flex flex-col justify-center h-2/5 items-center gap-6 ">
           <img
             src="/lightlogo.png"
             alt="Logo"
-            className="w-20"
+            className="w-28"
           />
           <h2 className="text-4xl  gap-1 flex items-center font-bold">
             Welcome Back!!
@@ -80,12 +81,12 @@ const Login = () => {
             e.preventDefault();
             await handleLogIn(email, password);
           }}
-          className="flex w-full flex-col gap-4 justify-center items-center"
+          className="flex w-full flex-col py-5 max-w-[450px] gap-4 justify-center items-center"
         >
           <input
             type="text"
             required
-            className="p-4 w-full border border-black rounded-2xl"
+            className="p-4 w-full py-5 max-w-[450px] border border-black rounded-2xl"
             placeholder="Email"
             onInput={(e) =>
               setEmail(e.target.value)
@@ -94,7 +95,7 @@ const Login = () => {
           <input
             type="password"
             required
-            className="p-4 w-full border border-black rounded-2xl"
+            className="p-4 w-full py-5 max-w-[450px] border border-black rounded-2xl"
             placeholder="Password"
             onInput={(e) =>
               setPassword(e.target.value)
@@ -108,12 +109,12 @@ const Login = () => {
               {errorMessage}
             </p>
           )}
-          <button className={`bg-black p-3 rounded-2xl text-xl font-bold w-full text-white focus:outline-none ${transition}`}>
+          <button className={`bg-black p-3 rounded-2xl text-xl py-4  font-bold w-4/5 text-white focus:outline-none ${transition}`}>
             <span>Log in</span>
           </button>
         </form>
       </div>
-      <div className="bg-black text-sky-500 rounded-[30px_0_0_30px] h-screen  flex flex-col justify-between gap-4 items-center p-24">
+      <div className="bg-black text-sky-500 rounded-[30px_0_0_30px] h-screen  flex flex-col justify-around gap-4 items-center p-24">
         <div className="flex flex-col items-center gap-4">
           <img
             src="/darkLogo.png"
@@ -129,7 +130,7 @@ const Login = () => {
         </div>
         <div className="flex flex-col items-center gap-6">
           <p className="text-white text-xl">
-            New to our platform? sign up now.
+            New to our platform? Sign up now.
           </p>
           <button
             onClick={() => navigate("/signup")}
