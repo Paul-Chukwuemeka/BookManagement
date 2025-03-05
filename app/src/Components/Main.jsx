@@ -1,20 +1,20 @@
 import Header from "./header";
 import Table from "./Table";
 import { FaPlusCircle, FaSearch } from "react-icons/fa";
-import PropTypes from 'prop-types';
-const Main = ({books}) => {
+import PropTypes from "prop-types";
+const Main = ({ books }) => {
   return (
     <div className="relative bg-[#c7c7c770] p-4">
       <Header />
       <div className="flex justify-between p-4 mt-10 items-center">
-        <h1 className="text-xl font-bold">Book Management</h1>
+        <h1 className="text-2xl font-bold">Book Management</h1>
         <span className="flex gap-2">
-          <button className="flex items-center justify-center p-2 rounded-md gap-2 bg-black text-gray-200">
-            <FaPlusCircle className="text-white" />
+          <button className="flex items-center justify-center p-2 py-2 text-lg rounded-md gap-2 bg-black text-gray-200">
+            <FaPlusCircle className="text-white " />
             Add Book
           </button>
           <span className="flex items-center gap-2 bg-white p-2 rounded-md">
-            <FaSearch/>
+            <FaSearch />
             <input
               type="text"
               name="search"
@@ -25,7 +25,7 @@ const Main = ({books}) => {
           </span>
         </span>
       </div>
-      <Table books={books}/>
+      <Table books={books} />
     </div>
   );
 };
@@ -34,4 +34,3 @@ Main.propTypes = {
 };
 
 export default Main;
-

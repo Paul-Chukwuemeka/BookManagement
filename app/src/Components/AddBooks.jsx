@@ -5,19 +5,14 @@ import { LibraryContext } from "../contexts/contextFile";
 import Loading from "./loading";
 
 const AddBooks = () => {
-  const { loading, setLoading } = useContext(
-    LibraryContext
-  );
+  const { loading, setLoading } = useContext(LibraryContext);
   const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
   const [date, setdate] = useState("");
-  const [description, setDescription] =
-    useState("");
+  const [description, setDescription] = useState("");
   const [link, setLink] = useState("");
 
-  const user = JSON.parse(
-    localStorage.getItem("user")
-  );
+  const user = JSON.parse(localStorage.getItem("user"));
   const token = user ? user.jwt : null;
 
   const handleSubmit = async () => {
@@ -51,8 +46,8 @@ const AddBooks = () => {
   };
 
   const navigate = useNavigate();
-  const transition = "hover:bg-white duration-700  hover:text-black hover:border hover:border-black"
-
+  const transition =
+    "hover:bg-white duration-700  hover:text-black hover:border hover:border-black";
 
   return (
     <div className="flex flex-col justify-center items-center p-4 absolute duration-700 top-0 right-0 left-0 bottom-0">
@@ -70,18 +65,14 @@ const AddBooks = () => {
           required
           placeholder="Title"
           className="p-2"
-          onInput={(e) =>
-            setTitle(e.target.value)
-          }
+          onInput={(e) => setTitle(e.target.value)}
         />
         <input
           type="text"
           required
           placeholder="Author"
           className="p-2"
-          onInput={(e) =>
-            setAuthor(e.target.value)
-          }
+          onInput={(e) => setAuthor(e.target.value)}
         />
         <input
           type="text"
@@ -103,13 +94,19 @@ const AddBooks = () => {
           placeholder="Description"
           id=""
           className="p-2"
-          onInput={(e) =>
-            setDescription(e.target.value)
-          }
+          onInput={(e) => setDescription(e.target.value)}
         ></textarea>
         <span className="flex gap-2 justify-center">
-          <button className={`p-2 w-36 rounded-lg border border-black ${transition} bg-black text-white`}>Cancel</button>
-          <button className={`p-2 w-36 rounded-lg  border border-black ${transition}  hover:bg-black hover:text-white`}>Save</button>
+          <button
+            className={`p-2 w-36 rounded-lg border border-black ${transition} bg-black text-white`}
+          >
+            Cancel
+          </button>
+          <button
+            className={`p-2 w-36 rounded-lg  border border-black ${transition}  hover:bg-black hover:text-white`}
+          >
+            Save
+          </button>
         </span>
       </form>
     </div>
