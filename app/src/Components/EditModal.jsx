@@ -51,7 +51,7 @@ const EditModal = () => {
     <div className="w-full h-full z-10 flex pt-20 justify-center items-start backdrop-blur-sm absolute top-0 left-0">
       <div className=" p-8 relative">
         <button
-          className="text-red-500  text-3xl absolute top-0 right-0"
+          className="text-red-500  text-3xl top-0 right-0"
           onClick={() => setEditModal(false)}
         >
           <MdCancel />

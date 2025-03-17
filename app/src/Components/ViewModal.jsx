@@ -1,27 +1,33 @@
 /* eslint-disable react/prop-types */
 import { MdCancel } from "react-icons/md";
 import { LibraryContext } from "../contexts/contextFile";
-import { useContext,useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { ImBooks } from "react-icons/im";
 
 const ViewModal = ({ selectedBook }) => {
-    const {
-      setViewModal,
-    } = useContext(LibraryContext);
+  const { setViewModal } = useContext(LibraryContext);
   return (
     <div className="absolute w-full h-screen flex justify-center items-center top-0 left-0 z-20 backdrop-blur-sm">
-      <div className="border-4 relative border-sky-500 p-8">
-        <button
-          className="text-red-500  text-3xl absolute top-0 right-0"
-          onClick={() => setViewModal(false)}
-        >
-          <MdCancel />
-        </button>
-        <div>
-            <img src={selectedBook.coverImage} alt=" cover image" />
-            <h1>{selectedBook.title}</h1>
-            <h1>{selectedBook.author}</h1>
-            <h1>{new Date(selectedBook.publishDate).toLocaleDateString()}</h1>
-            <h1>{selectedBook.description}</h1>
+      <div className=" bg-white shadow-[0_0_10px_#D7D7D7] rounded-lg relative w-10/12 h-[450px] p-6  ">
+        <div className="flex justify-between items-center border-b-2 border-black pb-2 mb-6">
+          <div className="flex items-center gap-2">
+            <div className="bg-[#D7D7D7] p-3 rounded-lg">
+              <ImBooks className="text-3xl" />
+            </div>
+            <span>View Book</span>
+          </div>
+          <button className="text-3xl " onClick={() => setViewModal(false)}>
+            <MdCancel />
+          </button>
+        </div>
+        <div className="flex border p-4 gap-4">
+          <div className="w-7/12 flex flex-col p-4 border-r-2 border-black">
+            <h1 className="text-lg border-b-2 border-black p-2 font-semibold capitalize">{selectedBook.title}</h1>
+            <h1 className="text-lg border-b-2 border-black p-2 font-semibold capitalize">{selectedBook.author}</h1>
+            <h1 className="text-lg border-b-2 border-black p-2 font-semibold capitalize">{new Date(selectedBook.publishDate).toLocaleDateString()}</h1>
+            <h1 className="text-lg border-b-2 border-black p-2 font-semibold capitalize">{selectedBook.description}</h1>
+          </div>
+          <img src={selectedBook.coverImage} className="w-5/12" alt=" cover image" />
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ import { LibraryContext } from "./contextFile";
 
 const LibraryProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
+  const [addBook, setAddBook] = useState(false);
   const [display, setDisplay] = useState("table");
   const [selectedBook, setSelectedBook] = useState({});
   const [viewModal,setViewModal] = useState(false);
@@ -26,7 +27,8 @@ const LibraryProvider = ({ children }) => {
         setEditModal,
         deleteModal,
         setDeleteModal,
-        
+        addBook,
+        setAddBook
       }}
     >
       {children}
