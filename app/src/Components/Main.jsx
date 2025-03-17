@@ -2,14 +2,33 @@ import Header from "./header";
 import Table from "./Table";
 import { FaPlusCircle, FaSearch } from "react-icons/fa";
 import PropTypes from "prop-types";
+import ViewModal from "../Components/ViewModal";
+import DeleteModal from "../Components/DeleteModal";
+import EditModal from "../Components/EditModal";
+import { useContext } from "react";
+import { LibraryContext } from "../contexts/contextFile";
+
 const Main = ({ books }) => {
+  const {selectedBook, viewModal, deleteModal, editModal } =
+    useContext(LibraryContext);
   return (
-    <div className="relative bg-[#c7c7c770] p-4">
+    <div className="relative bg-[#c7c7c770] p-4 grid grid-rows-[120px_1fr]">
+      {viewModal && (
+        <ViewModal selectedBook={selectedBook} viewModal={viewModal} />
+      )}
+      {deleteModal && <DeleteModal selectedBook={selectedBook} />}
+      {editModal && (
+        <EditModal selectedBook={selectedBook} editModal={editModal} />
+      )}
       <Header />
       <div className="flex justify-between p-4 mt-10 items-center">
         <h1 className="text-2xl font-bold">Book Management</h1>
         <span className="flex gap-2">
-          <button className="flex items-center justify-center p-2 py-2 text-lg rounded-md gap-2 bg-black text-gray-200">
+          <button className="flex items-center justify-center p-2 py-2 text-lg rounded-md gap-2 bg-black text-gray-200"
+          onClick={()=>{
+            
+          }}
+          >
             <FaPlusCircle className="text-white " />
             Add Book
           </button>

@@ -1,7 +1,7 @@
 import { FaEye, FaTrashAlt } from "react-icons/fa";
-import { LuPencilLine } from "react-icons/lu";
+import { BiSolidEditAlt } from "react-icons/bi";
 import { LibraryContext } from "../contexts/contextFile";
-import { useContext } from "react";
+import { useContext,useEffect } from "react";
 import Loading from "./loading";
 
 import PropTypes from "prop-types";
@@ -14,17 +14,19 @@ const Table = ({ books }) => {
     setDeleteModal,
     setEditModal,
   } = useContext(LibraryContext);
+
+  
   return (
-    <div className="bg-white shadow-md rounded-lg p-2 ">
-      <table className="w-full  ">
+    <div className="bg-white shadow-md rounded-lg p-2 overflow-y-auto ">
         {loading && <Loading />}
+      <table className="w-full  ">
         <thead>
           <tr className=" border-b border-black">
             <th className="p-2">#</th>
             <th>Title</th>
             <th>Author</th>
-            <th>Publish Date</th>
-            <th>Action</th>
+            <th className="w-4/12">Publish Date</th>
+            <th className="w-2/12">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -35,16 +37,9 @@ const Table = ({ books }) => {
                 <td>{book.title}</td>
                 <td>{book.author}</td>
                 <td>{new Date(book.publishDate).toLocaleDateString()}</td>
-                <td className="flex justify-center p-2 text-xl  items-center gap-4">
-                  <FaEye
-                    className="cursor-pointer"
-                    onClick={() => {
-                      setViewModal(true);
-                      setSelectedBook(book);
-                    }}
-                  />
-                  <LuPencilLine
-                    className="cursor-pointer"
+                <td className="flex justify-center p-4 text-xl  items-center gap-4">
+                  <BiSolidEditAlt
+                    className="cursor-pointer text-2xl"
                     onClick={() => {
                       setEditModal(true);
                       setSelectedBook(book);
@@ -57,6 +52,14 @@ const Table = ({ books }) => {
                       setSelectedBook(book);
                     }}
                   />
+                    <FaEye
+                      className="cursor-pointer"
+                      onClick={() => {
+                        setViewModal(true);
+                        
+                        setSelectedBook(book);
+                      }}
+                    />
                 </td>
               </tr>
             );
