@@ -6,7 +6,7 @@ import ViewModal from "../Components/ViewModal";
 import DeleteModal from "../Components/DeleteModal";
 import EditModal from "../Components/EditModal";
 
-import { useContext } from "react";
+import { useContext,useEffect } from "react";
 import { LibraryContext } from "../contexts/contextFile";
 import AddBooks from "./AddBooks";
 
@@ -19,6 +19,10 @@ const Main = ({ books }) => {
     addBook,
     setAddBook,
   } = useContext(LibraryContext);
+useEffect(()=>{
+console.log(addBook)
+},[addBook])
+
   return (
     <div className="relative bg-[#c7c7c770] p-4 grid grid-rows-[120px_1fr]">
       {viewModal && (

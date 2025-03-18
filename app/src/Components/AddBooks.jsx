@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useState, useContext } from "react";
 import { LibraryContext } from "../contexts/contextFile";
 import Loading from "./loading";
+import { MdCancel } from "react-icons/md";
+import { ImBooks } from "react-icons/im";
 
 const AddBooks = () => {
-  const { loading, setLoading } = useContext(LibraryContext);
+  const { loading, setLoading, setAddBook } = useContext(LibraryContext);
   const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
   const [date, setdate] = useState("");
@@ -50,65 +52,80 @@ const AddBooks = () => {
     "hover:bg-white duration-700  hover:text-black hover:border hover:border-black";
 
   return (
-    <div className="flex flex-col justify-center items-center p-4 absolute duration-700 top-0 right-0 left-0 bottom-0">
-      {loading && <Loading />}
-
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleSubmit();
-        }}
-        className="flex flex-col gap-2 border w-96 p-4 bg-sky-100"
-      >
-        <input
-          type="text"
-          required
-          placeholder="Title"
-          className="p-2"
-          onInput={(e) => setTitle(e.target.value)}
-        />
-        <input
-          type="text"
-          required
-          placeholder="Author"
-          className="p-2"
-          onInput={(e) => setAuthor(e.target.value)}
-        />
-        <input
-          type="text"
-          required
-          placeholder="link to image"
-          className="p-2"
-          onInput={(e) => setLink(e.target.value)}
-        />
-        <input
-          type="date"
-          required
-          placeholder="Publish Date"
-          className="p-2"
-          onInput={(e) => setdate(e.target.value)}
-        />
-        <textarea
-          name=""
-          required
-          placeholder="Description"
-          id=""
-          className="p-2"
-          onInput={(e) => setDescription(e.target.value)}
-        ></textarea>
-        <span className="flex gap-2 justify-center">
-          <button
-            className={`p-2 w-36 rounded-lg border border-black ${transition} bg-black text-white`}
-          >
-            Cancel
+    <div className="absolute w-full h-screen flex justify-center items-center top-0 left-0 z-20 backdrop-blur-sm">
+      <div className=" bg-white shadow-[0_0_10px_#D7D7D7] rounded-lg relative w-10/12 min-h-[450px] h-fit p-6 ">
+        <div className="flex justify-between items-center border-b-2 border-black pb-2 mb-6">
+          <div className="flex items-center gap-3">
+            <div className="bg-[#D7D7D7] p-3 rounded-lg">
+              <ImBooks className="text-3xl" />
+            </div>
+            <span className="text-2xl">Add Book</span>
+          </div>
+          <button className="text-3xl " onClick={() => setAddBook(false)}>
+            <MdCancel />
           </button>
-          <button
-            className={`p-2 w-36 rounded-lg  border border-black ${transition}  hover:bg-black hover:text-white`}
-          >
-            Save
-          </button>
-        </span>
-      </form>
+        </div>
+        {loading && <Loading />}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
+          className=" flex-col flex gap-2"
+        >
+          <div className="flex  gap-2">
+            <input
+              type="text"
+              required
+              placeholder="Title"
+              className="p-3 border-2 w-10/12 border-gray-300 rounded-lg"
+              onInput={(e) => setTitle(e.target.value)}
+            />
+            <input
+              type="date"
+              required
+              placeholder="Publish Date"
+              className="p-2 border-2"
+              onInput={(e) => setdate(e.target.value)}
+            />
+          </div>
+          <input
+            type="text"
+            required
+            placeholder="Author"
+            className="p-2 border-2"
+            onInput={(e) => setAuthor(e.target.value)}
+          />
+          <input
+            type="text"
+            required
+            placeholder="link to image"
+            className="p-2 border-2"
+            onInput={(e) => setLink(e.target.value)}
+          />
+          <textarea
+            name=""
+            required
+            placeholder="Description"
+            maxLength={400}
+            id=""
+            className="p-2 border-2 h-fit resize-none"
+            onInput={(e) => setDescription(e.target.value)}
+          ></textarea>
+          <span className="flex gap-2 justify-center">
+            <button
+              className={`p-2 w-36 rounded-lg border border-black ${transition} bg-black text-white`}
+            >
+              Cancel
+            </button>
+            <button
+              className={`p-2 w-36 rounded-lg  border border-black ${transition}  hover:bg-black hover:text-white`}
+            >
+              Save
+            </button>
+          </span>
+        </form>
+      </div>
     </div>
   );
 };
