@@ -9,7 +9,7 @@ import { ImBooks } from "react-icons/im";
 import axios from "axios";
 
 const EditModal = () => {
-  const { selectedBook, setEditModal } = useContext(LibraryContext);
+  const { selectedBook, setEditModal,setUpdate } = useContext(LibraryContext);
   const [author, setAuthor] = useState(selectedBook.author);
   const [title, setTitle] = useState(selectedBook.title);
   const [date, setDate] = useState(selectedBook.publishDate);
@@ -29,15 +29,20 @@ const EditModal = () => {
 
   const handleUpdate = async () => {
     const id = selectedBook._id;
-    axios.put(
-      `https://bookmanagement-3qi0.onrender.com/books/${id}`,
-      newSelectedBook,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    try {
+      axios.put(
+        `https://bookmanagement-3qi0.onrender.com/books/${id}`,
+        newSelectedBook,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      setUpdate(true)
+    } catch (error) {
+      console.log(error)
+    }
   };
   useEffect(() => {
     const textArea = textAreaRef.current;

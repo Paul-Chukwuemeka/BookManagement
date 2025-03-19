@@ -7,7 +7,7 @@ import { MdCancel } from "react-icons/md";
 import { ImBooks } from "react-icons/im";
 
 const AddBooks = () => {
-  const { loading, setLoading, setAddBook } = useContext(LibraryContext);
+  const { loading, setLoading, setAddBook,setUpdate } = useContext(LibraryContext);
   const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
   const [date, setdate] = useState("");
@@ -42,6 +42,7 @@ const AddBooks = () => {
         setLoading(false);
         setAddBook(false);
         textAreaRef.current.value = "";
+        setUpdate(true);
       })
       .catch((err) => {
         setAddBook(false);

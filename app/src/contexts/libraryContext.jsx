@@ -13,6 +13,8 @@ const LibraryProvider = ({ children }) => {
   const [editModal,setEditModal] = useState(false);
   const [deleteModal,setDeleteModal] = useState(false);
   const [search,setSearch] = useState('')
+  const [update,setUpdate] = useState(false)
+
 
   return (
     <LibraryContext.Provider
@@ -32,7 +34,9 @@ const LibraryProvider = ({ children }) => {
         addBook,
         setAddBook,
         search,
-        setSearch
+        setSearch,
+        update,
+        setUpdate
       }}
     >
       {children}

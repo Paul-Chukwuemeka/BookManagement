@@ -7,7 +7,7 @@ import { FaTrashAlt } from "react-icons/fa";
 import { MdCancel } from "react-icons/md";
 
 const DeleteModal = () => {
-  const { setDeleteModal, selectedBook } = useContext(LibraryContext);
+  const { setDeleteModal, selectedBook,setUpdate } = useContext(LibraryContext);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   const token = user ? user.jwt : null;
@@ -19,11 +19,16 @@ const DeleteModal = () => {
   }, [token]);
 
   const handleDelete = (id) => {
+   try {
     axios.delete(`https://bookmanagement-3qi0.onrender.com/books/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
+    setUpdate(true);
+   } catch (error) {
+    console.log(error)
+   }
   };
   console.log(selectedBook);
   return (
