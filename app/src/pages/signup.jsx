@@ -1,4 +1,4 @@
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { LibraryContext } from "../contexts/contextFile";
@@ -31,7 +31,7 @@ const Signup = () => {
       navigate("/");
     } catch (error) {
       setError(true);
-      setLoading(false)
+      setLoading(false);
       if (error.response) {
         setErrorMessage(error.response.data.message);
       } else {
@@ -43,9 +43,9 @@ const Signup = () => {
     "hover:bg-white duration-700  hover:text-black hover:border hover:border-black";
 
   return (
-    <div className="grid grid-cols-2">
-      <div className="bg-black text-white rounded-[0px_30px_30px_0px] h-screen text-5xl flex flex-col justify-around gap-2 items-center p-24  ">
-      {loading && <Loading />}
+    <div className="grid grid-cols-2 max-xl:block">
+      <div className="bg-black text-white rounded-[0px_30px_30px_0px] h-screen text-5xl flex flex-col justify-around gap-2 items-center p-24 max-xl:hidden  ">
+        {loading && <Loading />}
         <div className="flex flex-col items-center gap-1">
           <img src="/darkLogo.png" alt="Logo" className="w-24" />
           <p>BookWorm</p>
@@ -63,7 +63,7 @@ const Signup = () => {
           </button>
         </div>
       </div>
-      <div className="flex flex-col justify-around items-center px-32 p-16 gap-6 ">
+      <div className="flex flex-col justify-around items-center px-32 p-16 gap-6 max-xl:px-12 ">
         <div className="flex flex-col justify-center h-2/5 items-center gap-6 ">
           <img src="/lightlogo.png" alt="Logo" className="w-28" />
           <h2 className="text-4xl  gap-1 flex items-center font-bold">
@@ -80,21 +80,21 @@ const Signup = () => {
         >
           <input
             type="text"
-            className="p-4 py-5 w-full border border-black rounded-2xl"
+            className="p-4  w-full border border-black rounded-lg"
             placeholder="User name"
             required
             onInput={(e) => setUserName(e.target.value)}
           />
           <input
             type="text"
-            className="p-4 py-5 w-full border border-black rounded-2xl"
+            className="p-4  w-full border border-black rounded-lg"
             placeholder="Email"
             required
             onInput={(e) => setEmail(e.target.value.toLowerCase())}
           />
           <input
             type="password"
-            className="p-4 py-5 w-full border border-black rounded-2xl"
+            className="p-4  w-full border border-black rounded-lg"
             placeholder="Password"
             required
             onInput={(e) => setPassword(e.target.value)}
@@ -106,6 +106,7 @@ const Signup = () => {
             <span>Sign Up</span>
           </button>
         </form>
+        <h2 className="text-center hidden max-xl:block text-md font-semibold">Already have an account? <span className="underline"> Sign In now.</span></h2>
       </div>
     </div>
   );

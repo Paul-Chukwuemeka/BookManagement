@@ -59,7 +59,7 @@ const Home = () => {
   }, [search]);
 
   return (
-    <div className="min-h-screen relative grid-cols-[160px_1fr] grid">
+    <div className="min-h-screen relative grid-cols-[160px_1fr] grid max-xl:block">
       <SideBar />
       <Main books={filteredBooks} />
     </div>

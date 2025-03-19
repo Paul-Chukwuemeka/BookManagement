@@ -29,7 +29,7 @@ const Header = () => {
   );
 
   return (
-    <div className="bg-white py-2 px-6 flex justify-between absolute top-0 left-0 w-full ">
+    <div className="bg-white py-2 px-6 flex justify-between absolute top-0 left-0 w-full  max-xl:bg-red-500 ">
       <div className="flex gap-2 items-center font-medium">
         <FaUserAlt className="text-3xl" />
         <span>
