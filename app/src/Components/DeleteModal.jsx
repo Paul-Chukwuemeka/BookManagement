@@ -45,7 +45,7 @@ const DeleteModal = () => {
             {`Are you certain you wish to proceed with the deletion of "${selectedBook.title}"`}
           </h1>
           <button
-            className=" bg-black border-black border-1 font-bold duration-700 text-xl py-3 w-64 text-white cursor-pointer rounded-lg hover:bg-white hover:text-black "
+            className=" bg-black border-black border-2 font-bold duration-700 text-xl py-3 w-64 text-white cursor-pointer rounded-lg hover:bg-white hover:text-black "
             onClick={() => {
               handleDelete(selectedBook._id);
               setDeleteModal(false);
