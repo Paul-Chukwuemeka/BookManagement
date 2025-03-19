@@ -5,12 +5,12 @@ import PropTypes from "prop-types";
 import ViewModal from "../Components/ViewModal";
 import DeleteModal from "../Components/DeleteModal";
 import EditModal from "../Components/EditModal";
-
-import { useContext,useEffect } from "react";
+import { useContext, useEffect,useState } from "react";
 import { LibraryContext } from "../contexts/contextFile";
 import AddBooks from "./AddBooks";
 
 const Main = ({ books }) => {
+
   const {
     selectedBook,
     viewModal,
@@ -18,10 +18,11 @@ const Main = ({ books }) => {
     editModal,
     addBook,
     setAddBook,
+    setSearch
   } = useContext(LibraryContext);
-useEffect(()=>{
-console.log(addBook)
-},[addBook])
+  useEffect(() => {
+    console.log(addBook);
+  }, [addBook]);
 
   return (
     <div className="relative bg-[#c7c7c770] p-4 grid grid-rows-[120px_1fr]">
@@ -54,6 +55,9 @@ console.log(addBook)
               className="bg-transparent border-none outline-none focus:outline-none"
               placeholder="Search by name or author"
               id=""
+              onInput={(e)=>{
+                setSearch(e.target.value)
+              }}
             />
           </span>
         </span>
