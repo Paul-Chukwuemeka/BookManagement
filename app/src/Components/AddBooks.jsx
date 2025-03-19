@@ -117,7 +117,7 @@ useEffect(()=>{
             required
             ref={textAreaRef}
             placeholder="Description"
-            maxLength={400}
+            maxLength={500}
             value={description}
             id=""
             className="p-2 border-2 h-fit resize-none border-gray-300 rounded-md"

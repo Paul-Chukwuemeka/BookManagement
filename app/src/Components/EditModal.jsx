@@ -56,8 +56,9 @@ const EditModal = () => {
       setDate(formattedDate);
     }
   }, [selectedBook.publishDate]);
-  
+
   useEffect(() => {
+    console.log(date)
     setNewselectedBook({
       title: title,
       author: author,
@@ -77,7 +78,7 @@ const EditModal = () => {
             </div>
             <span className="text-2xl">Add Book</span>
           </div>
-          <button className="text-3xl " onClick={() => setAddBook(false)}>
+          <button className="text-3xl " onClick={() => setEditModal(false)}>
             <MdCancel />
           </button>
         </div>
@@ -126,7 +127,7 @@ const EditModal = () => {
             ref={textAreaRef}
             required
             placeholder="Description"
-            id=""
+            maxLength={500}
             className="p-3 border-2 w-10/12 border-gray-300 rounded-md"
             value={description}
             onChange={(e) => setDescription(e.target.value)}

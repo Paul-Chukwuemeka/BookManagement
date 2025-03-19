@@ -25,7 +25,7 @@ const Table = ({ books }) => {
             <th className="p-2">#</th>
             <th>Title</th>
             <th>Author</th>
-            <th className="w-4/12">Publish Date</th>
+            <th className="w-2/12">Publish Date</th>
             <th className="w-2/12">Action</th>
           </tr>
         </thead>

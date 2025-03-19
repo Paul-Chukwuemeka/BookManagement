@@ -7,7 +7,7 @@ import { LibraryContext } from "../contexts/contextFile";
 
 
 const Home = () => {
-  const { setLoading} = useContext(LibraryContext);
+  const { setLoading,deleteModal,editModal,addBook} = useContext(LibraryContext);
   const [books, setBooks] = useState([]);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
@@ -37,7 +37,7 @@ const Home = () => {
     };
 
     fetchBooks();
-  }, [token]);
+  }, [token,deleteModal,editModal,addBook]);
 
   return (
     <div className="min-h-screen relative grid-cols-[160px_1fr] grid">

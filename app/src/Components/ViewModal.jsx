@@ -22,12 +22,12 @@ const ViewModal = ({ selectedBook }) => {
         </div>
         <div className="flex border p-4 gap-4">
           <div className="w-7/12 flex flex-col p-4 border-r-2 border-black">
-            <h1 className="text-lg border-b-2 border-black p-2 font-semibold capitalize">{selectedBook.title}</h1>
-            <h1 className="text-lg border-b-2 border-black p-2 font-semibold capitalize">{selectedBook.author}</h1>
-            <h1 className="text-lg border-b-2 border-black p-2 font-semibold capitalize">{new Date(selectedBook.publishDate).toLocaleDateString()}</h1>
-            <h1 className="text-lg border-b-2 border-black p-2 font-semibold capitalize">{selectedBook.description}</h1>
+            <h1 className="text-lg border-b-2 border-black p-2 font-[600] capitalize">{selectedBook.title}</h1>
+            <h1 className="text-lg border-b-2 border-black p-2 font-[600] capitalize">{selectedBook.author}</h1>
+            <h1 className="text-lg border-b-2 border-black p-2 font-[600] capitalize">{new Date(selectedBook.publishDate).toLocaleDateString()}</h1>
+            <h1 className="text-lg border-b-2 border-black p-2 font-[500] ">{selectedBook.description}</h1>
           </div>
-          <img src={selectedBook.coverImage} className="w-5/12 h-64" alt=" cover image" />
+          <img src={selectedBook.coverImage} className="w-5/12 h-96  " alt=" cover image" />
         </div>
       </div>
     </div>
