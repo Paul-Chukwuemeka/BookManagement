@@ -35,7 +35,7 @@ const Main = ({ books }) => {
       {addBook && <AddBooks />}
       <Header />
       <div className="flex justify-between p-4 mt-10 items-center">
-        <h1 className="text-2xl font-bold max-xl:hidden">Book Management</h1>
+        <h1 className="text-2xl font-bold max-md:hidden">Book Management</h1>
         <span className="flex gap-2">
           <button
             className="flex items-center justify-center p-2 py-2 text-lg rounded-md gap-2 bg-black text-gray-200 max-xl:text-lg"
@@ -44,7 +44,7 @@ const Main = ({ books }) => {
             }}
           >
             <FaPlusCircle className="text-white " />
-            <span className="max-xl:hidden">Add Book</span>
+            <span className="max-md:hidden">Add Book</span>
           </button>
           <span className="flex items-center gap-2 bg-white p-2 rounded-md max-xl:p-3 ">
             <FaSearch />

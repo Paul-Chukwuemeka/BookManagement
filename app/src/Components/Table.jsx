@@ -19,25 +19,25 @@ const Table = ({ books }) => {
   return (
     <div className="bg-white shadow-md rounded-lg p-2 overflow-y-auto ">
         {loading && <Loading />}
-      <table className="w-full  ">
+      <table className="w-full max-md:text-xs ">
         <thead>
           <tr className=" border-b border-black">
-            <th className="p-2">#</th>
+            <th className="p-2 max-md:hidden">#</th>
             <th>Title</th>
             <th>Author</th>
             <th className="w-2/12">Publish Date</th>
-            <th className="w-2/12">Action</th>
+            <th className="w-2/12 max-md:hidden">Action</th>
           </tr>
         </thead>
         <tbody>
           {books.map((book, index) => {
             return (
-              <tr key={index} className="text-center font-semibold">
-                <td>{index + 1}</td>
-                <td>{book.title}</td>
-                <td>{book.author}</td>
-                <td>{new Date(book.publishDate).toLocaleDateString()}</td>
-                <td className="flex justify-center p-4 text-xl  items-center gap-4">
+              <tr key={index} className="text-center font-semibold border-b-2">
+                <td className="max-md:hidden">{index + 1}</td>
+                <td className="max-md:text-sm">{book.title}</td>
+                <td className="max-md:text-sm">{book.author}</td>
+                <td className="max-md:text-sm">{new Date(book.publishDate).toLocaleDateString()}</td>
+                <td className="flex justify-center p-4 text-xl  items-center gap-4 max-md:hidden">
                   <BiSolidEditAlt
                     className="cursor-pointer text-2xl"
                     onClick={() => {

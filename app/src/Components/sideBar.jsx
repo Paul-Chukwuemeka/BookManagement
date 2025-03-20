@@ -15,7 +15,7 @@ const SideBar = () => {
   const classList =
     "flex items-center px-5 gap-2 p-2 w-full text-white hover:bg-white hover:text-black cursor-pointer";
   return (
-    <div className="h-fit min-h-screen p-4 max-xl:hidden  font-light bg-black text-white flex flex-col justify-between items-center ">
+    <div className="h-fit min-h-screen p-4 max-lg:hidden  font-light bg-black text-white flex flex-col justify-between items-center ">
       <div className="flex flex-col items-center gap-2"> 
         <img src="/darkLogo.png" alt="Logo" className="h-12 mb-2" />
         <h1 className="text-2xl font-bold">BookWorm</h1>
